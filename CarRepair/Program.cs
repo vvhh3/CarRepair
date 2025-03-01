@@ -1,4 +1,5 @@
 using CarRepair.Components;
+using CarRepair.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddScoped<ClientRepair>();
+builder.Services.AddScoped<RecordRepair>();
+builder.Services.AddScoped<RepairService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
