@@ -1,0 +1,42 @@
+.Repair-blocks{
+    max-width: 1400px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.block{
+    height: 300px;
+    width: 390px;
+    border-radius: 9px;
+    margin-left: 15px;
+    margin-top: 10px;
+    border: 1px solid gray;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+.image{
+    width: 388px;
+    height: 145px;
+    border-radius: 9px 9px 4px 4px;
+}
+.block-header{
+    height: 30px;
+    display: flex;
+}
+.header-text{
+    font-size: 11px;
+    margin:7px;
+}
+.block-avatar{
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    margin: 7px;
+}
+.text-header{
+    font-weight:600;
+    margin:7px;
+    margin-top:10px;
+}
+.text{
+    font-size:12px;
+    color:rgba(0, 0, 0, 0.42);
+}

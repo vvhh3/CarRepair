@@ -7,34 +7,32 @@
 @inject RepairService RepairService
 
 <h3>Услуги</h3>
+@foreach (RepairModel rep in RepairService.ServicesPage)
+{
+    <div class="Repair-blocks">
+     <div class="block">
+            <div class="block-img">
+                <img class="image" src="image/Repair.png"/>
+                <div class="block-header">
+                    <img class="block-avatar" src="image/Repair.png"/>
+                    <div class="header-text">Trendamoda<br> 289,9 тыс читали • 3 месяца назад<br/>
+                    </div>
+                </div>
+                <div class="block-text">
+                    <div class="text-header"> ВЫ ТОЖЕ ТАК УСТАЛИ? Легендарный Пудж теперь на вашей футболке!
+                        <div class="text"> Забудьте скучные и серые футболки — теперь ваш стильный образ станет не только модным, но и эпическим! Представляем футболку с классическим Пуджом из Dota 2...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
 @code {
     
-    public IList<RepairModel> ServicesPage = new List<RepairModel>();
-    private RepairModel _newServicesPage = new RepairModel();
-    const string path = "ServisecPage.json";
-    
     protected override void OnInitialized()
     {
-        OpenFile();
+        RepairService.OpenFile();
     }
-    public void OpenFile()
-    {
-        if (File.Exists(path))
-        {
-            var json = File.ReadAllText(path);
-            ServicesPage = JsonConvert.DeserializeObject<List<RepairModel>>(json)!;
-        }
-        else
-        {
-            SaveFile();
-        }
-    }
-
-    public void SaveFile()
-    {
-        var json = JsonConvert.SerializeObject(ServicesPage);
-        File.WriteAllText(path, json);
-    }
-
 }

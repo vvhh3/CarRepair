@@ -1,0 +1,75 @@
+.Client-input{
+    width: 700px;
+    height:50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: black;
+    border: 1px solid black;
+}
+.client-name{
+    border: 1px solid white;
+    max-width: 200px;
+    width: 270px;
+    height: 40px;
+    margin-right: 25px;
+    border-radius: 5px;
+}
+.client-text{
+    margin-right: 25px;
+    width: 250px;
+    height: 40px;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.sub-btn{
+    border: none;
+    max-width: 150px;
+    width: 170px;
+    height: 40px;
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+}
+.reviews-table{
+    max-width: 1500px;
+    width: 1500px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+.reviews-table-tr{
+    display: flex;
+}
+.reviews-table-td{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 200px;
+    border: 1px solid black;
+}
+.reviews-head{
+    display: flex;
+    width: 100%;
+}
+.reviews-avatar{
+    margin: 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.reviews-name{
+    margin: 15px;
+    width: 100%;
+    max-height: max-content;
+    font-size: 18px;
+    font-weight: bold;
+}
+.reviews-text{
+    margin-left: 15px;
+    font-size: 18px;
+    width: 95%;
+    word-break: break-all;
+    max-height: max-content;
+    margin-top: 20px;
+}

@@ -1,0 +1,38 @@
+                            @* Клиенты *@
+@page "/Client"
+@using CarRepair.Services
+@using CarRepair.Models
+@using Newtonsoft.Json
+@rendermode InteractiveServer
+@inject ClientRepair ClientRepair
+
+<h3>Client</h3>
+<div class="Client-input">
+<input  class="client-name" type="text" @bind="ClientRepair._newClientPage.ClientName" placeholder="Напишите своё имя"/>
+<textarea class="client-text" type="text" @bind="ClientRepair._newClientPage.ClientText" placeholder="Напишите вашу проблему"> </textarea>
+<button @onclick="ClientRepair.ClientAdd" class="sub-btn">Добавить</button>
+</div>
+
+<table class="reviews-table">
+    @foreach (ClientModel item in ClientRepair.ClientPage)
+    {
+        <tr class="reviews-table-tr">
+            <td class="reviews-table-td">
+                <div class="reviews-head">
+                    <img src="image/Avatar.png" class="reviews-avatar"/>
+                    <p class="reviews-name">@item.ClientName</p>
+                </div>
+                <td class="reviews-text-div">
+                    <p class="reviews-text">@item.ClientText</p>
+                </td>
+            </td>
+        </tr>
+    }
+</table>
+@code {
+    
+    protected override void OnInitialized()
+    {
+        ClientRepair.OpenFile();
+    }
+}
