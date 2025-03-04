@@ -1,38 +1,66 @@
-                           @*  Услуги  *@ 
+@*  Услуги  *@
 @page "/RepairPage"
 @using CarRepair.Services
 @using CarRepair.Models
 @using Newtonsoft.Json
 @rendermode InteractiveServer
 @inject RepairService RepairService
+@inject RecordRepair RecordRepair
 
 <h3>Услуги</h3>
-@foreach (RepairModel rep in RepairService.ServicesPage)
-{
-    <div class="Repair-blocks">
-     <div class="block">
-            <div class="block-img">
-                <img class="image" src="image/Repair.png"/>
-                <div class="block-header">
-                    <img class="block-avatar" src="image/Repair.png"/>
-                    <div class="header-text">Trendamoda<br> 289,9 тыс читали • 3 месяца назад<br/>
-                    </div>
-                </div>
-                <div class="block-text">
-                    <div class="text-header"> ВЫ ТОЖЕ ТАК УСТАЛИ? Легендарный Пудж теперь на вашей футболке!
-                        <div class="text"> Забудьте скучные и серые футболки — теперь ваш стильный образ станет не только модным, но и эпическим! Представляем футболку с классическим Пуджом из Dota 2...
-                        </div>
+<input class="client-name" type="text" @bind="RepairService._newServicesPage.ServiceTitle" placeholder="Название услуги"/>
+<textarea class="client-text" type="text" @bind="RepairService._newServicesPage.ServiceText" placeholder="Описание услуги"> </textarea>
+<input class="client-name" type="text" @bind="RepairService._newServicesPage.Price" placeholder="Стоимость услуги"/>
+<button @onclick="RepairService.ServiceAdd" class="sub-btn">Добавить Услугу</button>
+<div class="Repair-blocks">
+    <div class="block">
+        <div class="block-img">
+            <img class="image" src="image/Repair.png"/>
+            <div class="block-text">
+                <div class="text-header">
+                    Полировка
+                    <div class="text">
+                        Отпалируем ваш Авто до блеска
+                        <br/>Стоимость: 10000₽
+                        <label for="Record">Выберите дату записи:</label>
+                        <input type="date" id="Record">
+                        <button class="sub-btn">Записаться</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-}
+
+
+    @foreach (RepairModel rep in RepairService.ServicesPage)
+    {
+        <div class="block">
+            <div class="block-img">
+                <img class="image" src="image/Repair.png"/>
+                <div class="block-text">
+                    <div class="text-header">
+                        @rep.ServiceTitle
+                        <div class="text">
+                            @rep.ServiceText
+                            @* <label for="Record">Выберите дату записи:</label> *@
+                            @* <input type="date" id="Record"> *@
+                            <button class="sub-btn" @onclick="RecordRepair.RecordAdd">Записаться</button>
+                            <button @onclick="() => RepairService.Remove(rep)">Удалить</button>
+                            <br/>Стоимость: @rep.Price ₽
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
 @code {
-    
+
     protected override void OnInitialized()
     {
         RepairService.OpenFile();
     }
+
 }

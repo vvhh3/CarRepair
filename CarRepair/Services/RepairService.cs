@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Components;
+
 namespace CarRepair.Services; //Сервис для услуг
 using CarRepair.Models;
 using Newtonsoft.Json;
 public class RepairService
 {
     public IList<RepairModel> ServicesPage = new List<RepairModel>();
-    private RepairModel _newServicesPage = new RepairModel();
+    public RepairModel _newServicesPage = new RepairModel();
+    private List<RepairModel> _newRepairModel = new List<RepairModel>();
     const string path = "ServisecPage.json";
     
     public void OpenFile()
@@ -25,4 +28,18 @@ public class RepairService
         var json = JsonConvert.SerializeObject(ServicesPage);
         File.WriteAllText(path, json);
     }
+    public void ServiceAdd()
+    {
+        ServicesPage.Add(_newServicesPage);
+        _newServicesPage = new RepairModel();
+        SaveFile();
+        _newServicesPage.Id= (_newRepairModel.Count > 0) ? _newRepairModel.Max(u => u.Id) + 1 : 1;
+        _newRepairModel.Add(_newServicesPage);
+    }
+
+    public void Remove(RepairModel repairModel)
+    {
+        ServicesPage.Remove(repairModel);
+    }
+    
 }
