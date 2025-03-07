@@ -1,19 +1,31 @@
-                            @* Клиенты *@
+@* Клиенты *@
 @page "/Client"
 @using CarRepair.Services
 @using CarRepair.Models
 @using Newtonsoft.Json
 @rendermode InteractiveServer
 @inject ClientRepair ClientRepair
+@inject RepairService RepairService
+@inject RecordRepair RecordRepair
 
 <h3>Client</h3>
 <div class="Client-input">
-<input  class="client-name" type="text" @bind="ClientRepair._newClientPage.ClientName" placeholder="Напишите своё имя"/>
-<textarea class="client-text" type="text" @bind="ClientRepair._newClientPage.ClientText" placeholder="Напишите вашу проблему"> </textarea>
-<button @onclick="ClientRepair.ClientAdd" class="sub-btn">Добавить</button>
+    <input class="client-name" type="text" @bind="ClientRepair._newClientPage.ClientName" placeholder="Напишите своё имя"/>
+    <textarea class="client-text" type="text" @bind="ClientRepair._newClientPage.ClientText" placeholder="Напишите вашу проблему"> </textarea>
+    <label>Выберите Услугу:</label>
+    <select @bind="RepairService._newServicesPage.Id">
+        @foreach (RepairModel servise in RepairService.ServicesPage)
+        {
+            <option value="@servise.Id">@servise.ServiceTitle</option>
+            
+        }
+    </select>
+    <button @onclick="ClientRepair.ClientAdd" class="sub-btn">Добавить</button>
 </div>
 
 <table class="reviews-table">
+
+
     @foreach (ClientModel item in ClientRepair.ClientPage)
     {
         <tr class="reviews-table-tr">
@@ -22,17 +34,34 @@
                     <img src="image/Avatar.png" class="reviews-avatar"/>
                     <p class="reviews-name">@item.ClientName</p>
                 </div>
+                @* @foreach (RepairModel rep in RepairService.ServicesPage) *@
+                @* { *@
+                @*         string dap = RepairService.GetUslugaName(rep.Id); *@
+                @*         @dap *@
+                @* } *@
+                @{
+                    GetSelectedOptionText();
+                }
+                @item.ClientTitle
                 <td class="reviews-text-div">
                     <p class="reviews-text">@item.ClientText</p>
                 </td>
             </td>
         </tr>
     }
-</table>
+</table >
+
 @code {
-    
+
+    private void GetSelectedOptionText()
+    {
+            var selectedOption = RepairService.ServicesPage.FirstOrDefault(o => o.Id == RepairService._newServicesPage.Id);
+            ClientRepair._newClientPage.ClientTitle = selectedOption?.ServiceTitle ?? "Нет выбранного";
+           
+    }
     protected override void OnInitialized()
     {
         ClientRepair.OpenFile();
     }
+
 }

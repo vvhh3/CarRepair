@@ -10,4 +10,10 @@
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Data\ClientPage.json" />
+      <_ContentIncludedByDefault Remove="Data\RecordPage.json" />
+      <_ContentIncludedByDefault Remove="Data\ServisecPage.json" />
+    </ItemGroup>
+
 </Project>

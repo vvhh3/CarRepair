@@ -7,7 +7,7 @@ public class RepairService
 {
     public IList<RepairModel> ServicesPage = new List<RepairModel>();
     public RepairModel _newServicesPage = new RepairModel();
-    private List<RepairModel> _newRepairModel = new List<RepairModel>();
+    public List<RepairModel> _newRepairModel = new List<RepairModel>();
     const string path = "ServisecPage.json";
     
     public void OpenFile()
@@ -36,6 +36,17 @@ public class RepairService
         _newServicesPage.Id= (_newRepairModel.Count > 0) ? _newRepairModel.Max(u => u.Id) + 1 : 1;
         _newRepairModel.Add(_newServicesPage);
     }
+    // public string GetUslugaName(int uslugaId)
+    // {
+    //     RepairModel usluga = ServicesPage.FirstOrDefault(u => u.Id == uslugaId)!;
+    //     
+    //     if (usluga != null)
+    //     {
+    //         return usluga.ServiceTitle;
+    //     }
+    //
+    //     return "Услуга не найдена";
+    // }
 
     public void Remove(RepairModel repairModel)
     {
