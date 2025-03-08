@@ -3,6 +3,7 @@
 @using CarRepair.Services
 @using CarRepair.Models
 @using Newtonsoft.Json
+@using System.Text.Json
 @rendermode InteractiveServer
 @inject ClientRepair ClientRepair
 @inject RepairService RepairService
@@ -17,9 +18,10 @@
         @foreach (RepairModel servise in RepairService.ServicesPage)
         {
             <option value="@servise.Id">@servise.ServiceTitle</option>
-            
         }
     </select>
+    <h3>Выбирите дату:</h3>
+    <input type="date" @bind="RepairService._newServicesPage.Date"/>
     <button @onclick="ClientRepair.ClientAdd" class="sub-btn">Добавить</button>
 </div>
 
@@ -40,12 +42,15 @@
                 @*         @dap *@
                 @* } *@
                 @{
-                    GetSelectedOptionText();
+                    GetServiseTitle();
                 }
                 @item.ClientTitle
+                @* @ClientRepair._newClientPage.Test.ToString("MM/dd/yyyy") *@
+                @item.Test.ToString("yyyy-MM-dd")
                 <td class="reviews-text-div">
                     <p class="reviews-text">@item.ClientText</p>
                 </td>
+                <button @onclick="() => ClientRepair.RemoveClient(item)" class="btn-record">Удалить</button>
             </td>
         </tr>
     }
@@ -53,12 +58,13 @@
 
 @code {
 
-    private void GetSelectedOptionText()
+    private void GetServiseTitle()
     {
-            var selectedOption = RepairService.ServicesPage.FirstOrDefault(o => o.Id == RepairService._newServicesPage.Id);
-            ClientRepair._newClientPage.ClientTitle = selectedOption?.ServiceTitle ?? "Нет выбранного";
-           
+        var selectedOption = RepairService.ServicesPage.FirstOrDefault(o => o.Id == RepairService._newServicesPage.Id);
+        ClientRepair._newClientPage.ClientTitle = selectedOption?.ServiceTitle ?? "Нет выбранного";
+        ClientRepair._newClientPage.Test = Convert.ToDateTime(RepairService._newServicesPage.Date);
     }
+
     protected override void OnInitialized()
     {
         ClientRepair.OpenFile();

@@ -25,9 +25,8 @@
                         Отпалируем ваш Авто до блеска
                         <br/>Стоимость: 10000₽
                         <div class="text-footer">
-                            <button class="btn-record">Записаться</button>
-                            <button class="btn-record">Удалить</button>
-                            </div>
+                            <button class="btn-record"  @onclick="RecordAdd">Записаться</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,7 +49,7 @@
                             <br/>Стоимость: @rep.Price ₽
                             <div class="text-footer">
                                 <button class="btn-record" @onclick="RecordAdd">Записаться</button>
-                                <button @onclick="() => RepairService.Remove(rep)" class="btn-record">Удалить</button>
+                                <button @onclick="() => RepairService.RemoveServise(rep)" class="btn-record">Удалить</button>
                             </div>
                         </div>
                     </div>
@@ -59,10 +58,11 @@
         </div>
     }
 </div>
+
 @code {
     public List<RecordModel> _newRecordModel = new List<RecordModel>();
     public string text { get; set; } = "/Client";
-    
+
     public void RecordAdd()
     {
         RecordRepair.RecordPage.Add(RecordRepair._newRecordPage);
@@ -72,7 +72,7 @@
         _newRecordModel.Add(RecordRepair._newRecordPage);
         NavigationManager.NavigateTo(text);
     }
-    
+
     protected override void OnInitialized()
     {
         RepairService.OpenFile();

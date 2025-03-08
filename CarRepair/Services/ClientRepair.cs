@@ -1,5 +1,6 @@
 namespace CarRepair.Services; //Сервис для клиентов
 using CarRepair.Models;
+using CarRepair.Services;
 using Newtonsoft.Json;
 public class ClientRepair
 {
@@ -32,8 +33,8 @@ public class ClientRepair
     {
         ClientPage.Add(_newClientPage);
         _newClientPage = new ClientModel();
-        SaveFile();
         _newClientPage.Id= (ClientPage.Count > 0) ? ClientPage.Max(u => u.Id) + 1 : 1;
+        SaveFile();
     }
 
     // public string GetKlientName(int ClientId)
@@ -48,8 +49,9 @@ public class ClientRepair
     //     return "Клиент не найден";
     // }
 
-    // public void ClientDelete()
-    // {
-    //     ClientPage.Remove();
-    // }
+    public void RemoveClient(ClientModel clientModel)
+    {
+        ClientPage.Remove(clientModel);
+        SaveFile();
+    }
 }
