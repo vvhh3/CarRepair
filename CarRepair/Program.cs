@@ -8,7 +8,6 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddScoped<ClientRepair>();
-builder.Services.AddScoped<RecordRepair>();
 builder.Services.AddScoped<RepairService>();
 var app = builder.Build();
 

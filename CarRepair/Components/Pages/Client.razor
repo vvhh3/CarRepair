@@ -7,21 +7,21 @@
 @rendermode InteractiveServer
 @inject ClientRepair ClientRepair
 @inject RepairService RepairService
-@inject RecordRepair RecordRepair
 
 <h3>Client</h3>
 <div class="Client-input">
     <input class="client-name" type="text" @bind="ClientRepair._newClientPage.ClientName" placeholder="Напишите своё имя"/>
     <textarea class="client-text" type="text" @bind="ClientRepair._newClientPage.ClientText" placeholder="Напишите вашу проблему"> </textarea>
-    <label>Выберите Услугу:</label>
-    <select @bind="RepairService._newServicesPage.Id">
+    <label class="client-label">Выберите Услугу:</label>
+    <select @bind="RepairService._newServicesPage.Id" class="client-select">
         @foreach (RepairModel servise in RepairService.ServicesPage)
         {
             <option value="@servise.Id">@servise.ServiceTitle</option>
         }
     </select>
-    <h3>Выбирите дату:</h3>
-    <input type="date" @bind="RepairService._newServicesPage.Date"/>
+    <h3 class="Date-h3">Выбирите дату:</h3>
+    <input type="date" @bind="RepairService._newServicesPage.ClientDate"/>
+    <input type="time" @bind="ClientRepair._newClientPage.Vremia" min="10:00:00" max="20:00:00"/>
     <button @onclick="ClientRepair.ClientAdd" class="sub-btn">Добавить</button>
 </div>
 
@@ -36,17 +36,10 @@
                     <img src="image/Avatar.png" class="reviews-avatar"/>
                     <p class="reviews-name">@item.ClientName</p>
                 </div>
-                @* @foreach (RepairModel rep in RepairService.ServicesPage) *@
-                @* { *@
-                @*         string dap = RepairService.GetUslugaName(rep.Id); *@
-                @*         @dap *@
-                @* } *@
                 @{
                     GetServiseTitle();
                 }
-                @item.ClientTitle
-                @* @ClientRepair._newClientPage.Test.ToString("MM/dd/yyyy") *@
-                @item.Test.ToString("yyyy-MM-dd")
+                <p class="Client-title">Услуга: @item.ClientTitle | Дата: @item.Test.ToString("yyyy-MM-dd") | Время: @item.Vremia</p> 
                 <td class="reviews-text-div">
                     <p class="reviews-text">@item.ClientText</p>
                 </td>
@@ -62,7 +55,7 @@
     {
         var selectedOption = RepairService.ServicesPage.FirstOrDefault(o => o.Id == RepairService._newServicesPage.Id);
         ClientRepair._newClientPage.ClientTitle = selectedOption?.ServiceTitle ?? "Нет выбранного";
-        ClientRepair._newClientPage.Test = Convert.ToDateTime(RepairService._newServicesPage.Date);
+        ClientRepair._newClientPage.Test = Convert.ToDateTime(RepairService._newServicesPage.ClientDate);
     }
 
     protected override void OnInitialized()

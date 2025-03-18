@@ -7,7 +7,6 @@ public class ClientRepair
 
     public IList<ClientModel> ClientPage = new List<ClientModel>();
     public ClientModel _newClientPage = new ClientModel();
-    // public List<ClientModel> _newClientModel = new List<ClientModel>();
     const string path = "ClientPage.json";
     
     
@@ -36,19 +35,7 @@ public class ClientRepair
         _newClientPage.Id= (ClientPage.Count > 0) ? ClientPage.Max(u => u.Id) + 1 : 1;
         SaveFile();
     }
-
-    // public string GetKlientName(int ClientId)
-    // {
-    //     ClientModel clientModel = ClientPage.FirstOrDefault(k => k.Id == ClientId)!;
-    //     
-    //     if (clientModel!=null)
-    //     {
-    //         return _newClientPage.ClientName;
-    //     }
-    //
-    //     return "Клиент не найден";
-    // }
-
+    
     public void RemoveClient(ClientModel clientModel)
     {
         ClientPage.Remove(clientModel);

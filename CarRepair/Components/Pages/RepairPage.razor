@@ -7,7 +7,6 @@
 @inject RepairService RepairService
 @inject NavigationManager NavigationManager
 @inject ClientRepair ClientRepair
-@inject RecordRepair RecordRepair
 
 <h3>Услуги</h3>
 <input class="client-name" type="text" @bind="RepairService._newServicesPage.ServiceTitle" placeholder="Название услуги"/>
@@ -44,8 +43,6 @@
                         @rep.ServiceTitle
                         <div class="text">
                             @rep.ServiceText
-                            @* <label for="Record">Выберите дату записи:</label> *@
-                            @* <input type="date" id="Record"> *@
                             <br/>Стоимость: @rep.Price ₽
                             <div class="text-footer">
                                 <button class="btn-record" @onclick="RecordAdd">Записаться</button>
@@ -60,16 +57,10 @@
 </div>
 
 @code {
-    public List<RecordModel> _newRecordModel = new List<RecordModel>();
     public string text { get; set; } = "/Client";
 
     public void RecordAdd()
     {
-        RecordRepair.RecordPage.Add(RecordRepair._newRecordPage);
-        RecordRepair._newRecordPage = new RecordModel();
-        RecordRepair.SaveFile();
-        RecordRepair._newRecordPage.Id = (_newRecordModel.Count > 0) ? _newRecordModel.Max(u => u.Id) + 1 : 1;
-        _newRecordModel.Add(RecordRepair._newRecordPage);
         NavigationManager.NavigateTo(text);
     }
 

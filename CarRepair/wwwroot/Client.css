@@ -1,10 +1,9 @@
 .Client-input{
-    width: 1300px;
+    width: 1500px;
     height:50px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: black;
     border: 1px solid black;
 }
 .client-name{
@@ -23,12 +22,11 @@
     border-radius: 5px;
 }
 .sub-btn{
-    border: none;
     max-width: 150px;
     width: 170px;
     height: 40px;
     color: black;
-    background-color: white;
+    background-color: red;
     border-radius: 5px;
 }
 .reviews-table{
@@ -71,5 +69,13 @@
     width: 95%;
     word-break: break-all;
     max-height: max-content;
-    margin-top: 20px;
+}
+.client-select{
+    background-color: white;
+}
+.client-label{
+    background-color: white;
+}
+.Client-title{
+    margin-left: 15px;
 }

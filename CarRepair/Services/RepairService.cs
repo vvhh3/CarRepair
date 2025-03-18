@@ -39,18 +39,7 @@ public class RepairService
         _newRepairModel.Add(_newServicesPage);
         SaveFile();
     }
-    // public string GetUslugaName(int uslugaId)
-    // {
-    //     RepairModel usluga = ServicesPage.FirstOrDefault(u => u.Id == uslugaId)!;
-    //     
-    //     if (usluga != null)
-    //     {
-    //         return usluga.ServiceTitle;
-    //     }
-    //
-    //     return "Услуга не найдена";
-    // }
-
+    
     public void RemoveServise(RepairModel repairModel)
     {
         ServicesPage.Remove(repairModel);

@@ -1,4 +1,5 @@
-namespace CarRepair.Models; //Модель Услуг
+namespace CarRepair.Models;
+//Модель Услуг
 
 public class RepairModel
 {
@@ -6,7 +7,6 @@ public class RepairModel
     public string ServiceText { get; set; }
     public int? Price { get; set; }
     public int Id { get; set; }
-    
-    public DateTime Date { get; set; } = DateTime.Today;
-    
+
+    public DateTime ClientDate { get; set; } = DateTime.Today;
 }
